@@ -18,10 +18,8 @@
  * '04 Dec 1995 00:12:00 UTC' => 818035920000
  */
 function dateToTimestamp(date) {
-  const start = new Date('01 Jan 1970 00:00:00 UTC');
-  const end = new Date(date);
-  const elapsed = end - start;
-  return elapsed;
+  const time = new Date(date);
+  return time.valueOf();
 }
 
 /**
