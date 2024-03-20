@@ -187,6 +187,22 @@ function isDateInPeriod(date, period) {
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
 function formatDate(/* date */) {
+  // const time = new Date(date);
+  // const year = time.getFullYear();
+  // const month = time.getMonth();
+  // const day = time.getDate();
+  // const result = `${month}/${day}/${year}, `;
+  // const hour = time.getHours();
+  // const minute = time.getMinutes();
+  // const second = time.getSeconds();
+  // let temp = String(hour % 12);
+  // if (temp === '0') {
+  //   temp = '12';
+  // }
+  // temp += (minute < 10 ? ':0' : ':') + minute;
+  // temp += (second < 10 ? ':0' : ':') + second;
+  // temp += hour >= 12 ? ' PM' : ' AM';
+  // return result + temp;
   throw new Error('Not implemented');
 }
 
@@ -202,8 +218,19 @@ function formatDate(/* date */) {
  * 12, 2023 => 10
  * 1, 2024 => 8
  */
-function getCountWeekendsInMonth(/* month, year */) {
-  throw new Error('Not implemented');
+function getCountWeekendsInMonth(month, year) {
+  const totalDays = new Date(year, month, 0).getDate();
+
+  let weekendCount = 0;
+
+  for (let day = 1; day <= totalDays; day += 1) {
+    const dayOfWeek = new Date(year, month - 1, day).getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      weekendCount += 1;
+    }
+  }
+
+  return weekendCount;
 }
 
 /**
