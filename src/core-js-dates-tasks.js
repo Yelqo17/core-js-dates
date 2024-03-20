@@ -186,24 +186,30 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  // const time = new Date(date);
-  // const year = time.getFullYear();
-  // const month = time.getMonth();
-  // const day = time.getDate();
-  // const result = `${month}/${day}/${year}, `;
-  // const hour = time.getHours();
-  // const minute = time.getMinutes();
-  // const second = time.getSeconds();
-  // let temp = String(hour % 12);
-  // if (temp === '0') {
-  //   temp = '12';
-  // }
-  // temp += (minute < 10 ? ':0' : ':') + minute;
-  // temp += (second < 10 ? ':0' : ':') + second;
-  // temp += hour >= 12 ? ' PM' : ' AM';
-  // return result + temp;
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const time = new Date(date);
+  const year = time.getUTCFullYear();
+  const month = time.getUTCMonth() + 1;
+  const day = time.getUTCDate();
+  const result = `${month}/${day}/${year}, `;
+  let hour = time.getUTCHours();
+  const minute = time.getUTCMinutes();
+  const second = time.getUTCSeconds();
+  let amPm = 'AM';
+  if (hour === 0) {
+    hour = 12;
+  } else if (hour === 12) {
+    amPm = 'PM';
+  } else if (hour > 12) {
+    hour -= 12;
+    amPm = 'PM';
+  }
+
+  let temp = String(hour);
+  temp += (minute < 10 ? ':0' : ':') + minute;
+  temp += (second < 10 ? ':0' : ':') + second;
+  temp += ` ${amPm}`;
+  return result + temp;
 }
 
 /**
