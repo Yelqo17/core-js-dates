@@ -273,7 +273,8 @@ function getNextFridayThe13th(date) {
   if (nextFriday13.getDay() === 5) {
     return nextFriday13;
   }
-  while (true) {
+  const condition = true;
+  while (condition) {
     nextFriday13.setMonth(nextFriday13.getMonth() + 1);
     nextFriday13.setDate(13);
     if (nextFriday13.getDay() === 5) {
